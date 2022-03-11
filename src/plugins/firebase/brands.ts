@@ -31,9 +31,10 @@ const getBrands = async () => {
   return res;
 };
 
-const allBrands: IBrand[] = []
+let allBrands: IBrand[];
 
 const getBrandsGrouped = async () => {
+  allBrands = [];
   const req = await getDocs(brandsCol);
   req.forEach((doc) => {
     allBrands.push(new Brand(doc.id, doc.data()))
@@ -50,7 +51,6 @@ const getBrandsGrouped = async () => {
 
 const getBrandName = (id: string) => {
   const res = allBrands.find(s => s.id == id);
-  console.log(allBrands, res)
   if (res) {
     return res?.parentName ? `${res.parentName} ${res.name}` : res.name;
   }

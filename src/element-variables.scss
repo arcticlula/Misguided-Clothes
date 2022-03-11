@@ -8,4 +8,5 @@ $--color-primary: hotpink;
 /* icon font path, required */
 $--font-path: "~element-plus/lib/theme-chalk/fonts";
 
+@import "element-plus/theme-chalk/src/reset";
 @import "element-plus/theme-chalk/src/index";

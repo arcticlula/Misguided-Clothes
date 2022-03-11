@@ -2,7 +2,13 @@
   <el-main>
     <el-table :data="statusList" style="width: 100%">
       <el-table-column prop="name" label="Name" />
-      <el-table-column prop="location" label="Location" />
+      <el-table-column prop="location" label="Location">
+        <template #default="scope">
+          <el-tag disable-transitions>
+            {{ scope.row.location ? scope.row.location : 'default' }}
+          </el-tag>
+        </template>
+      </el-table-column>
     </el-table>
     <el-row justify="center" style="width: 100%;">
       <el-select v-model="status.id" placeholder="Select">
@@ -19,14 +25,15 @@
       <el-button type="primary" plain :icon="CirclePlus" v-on:click="submit">Save</el-button>
     </el-row>
   </el-main>
-  {{ status }}
+  <!-- {{ status }} -->
+  {{ statusList }}
 </template>
 
 <script setup lang="ts">
 import { CirclePlus, Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue';
 import type { IStatus } from '@/components/models/status.model';
-import { getStatuses, statusDoc, setStatus } from '@/plugins/firebase/status';
+import { getStatuses, setStatus } from '@/plugins/firebase/status';
 import type { ILocation } from '@/components/models/location.model';
 import { getLocations } from '@/plugins/firebase/locations';
 
@@ -47,13 +54,14 @@ const locationList = ref<ILocation[]>([]);
 })()
 
 const submit = async () => {
-  const status = statusList.value.find(s => s.id == status.value.id);
-  const location = locationList.value.find(s => s.id == status.value.locationId)?.name;
-  status.value.status = status.status;
-  status.value.name = status.name;
-  status.value.location = location;
+  const stat = statusList.value.find(s => s.id == status.value.id);
+  if(stat) {
+    status.value.status = stat.status;
+    status.value.name = stat.name;
+  }
+  status.value.location = locationList.value.find(s => s.id == status.value.locationId)?.name;
 
-  /* await setStatus(statusRef, status.value); */
+  statusList.value = await setStatus(status.value);
 }
 
 </script>

@@ -4,33 +4,18 @@ export enum StatusEnum {
   Used,
   Stored,
   OnLoan,
-  Lost
+  Lost,
+  GaveAway,
+  Discarded
 }
 
 export interface IStatus {
   id: string | null
   status: number,
-  name: string,
-  location?: string
-  locationId?: string | null
+  name: string
 }
 
-export class Status implements IStatus {
-  id: string | null;
-  status: number;
-  name: string;
-  location: string;
-  locationId?: string | null;
-  constructor(id: string, status: any) {
-    this.id = id;
-    this.status = status.status || StatusEnum.Normal;
-    this.name = 'Normal';
-    this.location = '';
-    this.locationId = status.locationId || null;
-  }
-}
-
-export const defaultStatuses: IStatus[] = [
+export const statusList: IStatus[] = [
   {
     id: 'normal',
     status: StatusEnum.Normal,
@@ -44,25 +29,31 @@ export const defaultStatuses: IStatus[] = [
   {
     id: 'used',
     status: StatusEnum.Used,
-    name: 'Used',
-    locationId: null
+    name: 'Used'
   },
   {
     id: 'stored',
     status: StatusEnum.Stored,
-    name: 'Stored',
-    locationId: null
+    name: 'Stored'
   },
   {
     id: 'onLoan',
     status: StatusEnum.OnLoan,
-    name: 'On Loan',
-    locationId: null
+    name: 'On Loan'
   },
   {
     id: 'lost',
     status: StatusEnum.Lost,
-    name: 'Lost',
-    locationId: null
+    name: 'Lost'
+  },
+  {
+    id: 'gaveAway',
+    status: StatusEnum.GaveAway,
+    name: 'Gave Away'
+  },
+  {
+    id: 'discarded',
+    status: StatusEnum.Discarded,
+    name: 'Discarded'
   }
 ]

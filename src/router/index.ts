@@ -44,7 +44,12 @@ const router = createRouter({
       path: '/status',
       name: 'status',
       component: () => import('../views/AddStatus.vue')
-    }
+    },
+    {
+      path: '/history/:id?',
+      name: 'history',
+      component: () => import('../views/History.vue')
+    },
   ]
 })
 

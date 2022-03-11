@@ -32,6 +32,7 @@ import { useRoute } from 'vue-router';
 import { CirclePlus, Plus } from '@element-plus/icons-vue'
 import type { IBrand } from '@/components/models/brand.model';
 import { getBrandById, setBrand, brandDoc, uploadBrandImg, getBrands } from '@/plugins/firebase/brands';
+import { historyDoc } from '@/plugins/firebase/history';
 
 const route = useRoute();
 const urlRoute = route.name as string;

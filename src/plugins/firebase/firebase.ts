@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { enableIndexedDbPersistence, getFirestore, collection } from 'firebase/firestore'
+import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
 // firebase init
